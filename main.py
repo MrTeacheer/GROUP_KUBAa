@@ -7,7 +7,8 @@ from handlers import (start,
                       quiz,
                       game,
                       fsm_store,
-                      fsm_kuba)
+                      fsm_kuba,
+                      group)
 
 async def on_startup(_):
     await db.sql_create()
@@ -18,6 +19,7 @@ quiz.register_quiz(dp=dp)
 game.register_game(dp=dp)
 fsm_store.register_fsm_store(dp=dp)
 fsm_kuba.store_fsm(dp=dp)
+group.registr_group(dp=dp)
 echo.register_echo(dp=dp)
 
 
