@@ -1,0 +1,26 @@
+CREATE_TABLE_PRODUCTS = """
+    CREATE TABLE IF NOT EXISTS products
+    (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255),
+    size VARCHAR(255),
+    price VARCHAR(255),
+    id_product VARCHAR(255),
+    photo TEXT
+    )
+"""
+
+INSERT_INTO_PRODUCTS='''
+INSERT INTO products VALUES (?,?,?,?,?,?)'''
+
+
+CREATE_TABLE_PRODUCT_DETAIL='''
+CREATE TABLE IF NOT EXISTS product_details(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+productid INTEGER,
+category VARCHAR(255),
+info_product VARCHAR(255)
+)'''
+
+INSERT_INTO_PRODUCTS_DETAIL='''
+INSERT INTO product_details VALUES (?,?,?,?)'''
