@@ -4,13 +4,15 @@ from handlers import (start,
                       echo,
                       commands,
                       quiz,
-                      game)
+                      game,
+                      fsm_store)
 
 
 start.register_start(dp=dp)
 commands.register_commands(dp=dp)
 quiz.register_quiz(dp=dp)
 game.register_game(dp=dp)
+fsm_store.register_fsm_store(dp=dp)
 echo.register_echo(dp=dp)
 
 
