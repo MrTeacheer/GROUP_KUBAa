@@ -14,6 +14,7 @@ class FSM_store(StatesGroup):
     id_product = State()
     category=State()
     info_product=State()
+    collection=State()
     photo_product = State()
 
 
@@ -62,6 +63,12 @@ async def load_category(message: types.Message, state: FSMContext):
 async def load_info_product(message: types.Message, state: FSMContext):
     async with state.proxy() as data_store:
         data_store['info_product'] = message.text
+    await message.answer('collection of product?')
+    await FSM_store.next()
+
+async def load_collection(message: types.Message, state: FSMContext):
+    async with state.proxy() as data_store:
+        data_store['collection'] = message.text
     await message.answer('photo of product?')
     await FSM_store.next()
 
@@ -89,6 +96,10 @@ async def load_photo(message: types.Message, state: FSMContext):
         category=data_store['category'],
         info=data_store['info_product']
     )
+    await db.sql_insert_collection(
+        id=data_store['id_product'],
+        collection=data_store['collection'],
+    )
     await state.finish()
 
 
@@ -100,4 +111,5 @@ def store_fsm(dp: Dispatcher):
     dp.register_message_handler(load_id_product, state=FSM_store.id_product)
     dp.register_message_handler(load_category, state=FSM_store.category)
     dp.register_message_handler(load_info_product,state=FSM_store.info_product)
+    dp.register_message_handler(load_collection, state=FSM_store.collection)
     dp.register_message_handler(load_photo, state=FSM_store.photo_product, content_types=['photo'])
